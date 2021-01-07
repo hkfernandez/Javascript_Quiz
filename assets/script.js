@@ -58,6 +58,36 @@ var countDownValue = 30
 var timer = document.getElementById ("timer");
 console.log (timer);
 
+// global variables
+var gameStatus = "on";
+var playerChoice;
+var questions = {question1: ["question1",1,2,3,1], question2: ["question2",1,2,3,2], question3: ["question3",1,2,3,3]};
+var currentQuestionNum = 1;
+var correctText = "Correct";
+var incorrectText = "Incorrect";
+var score = 0;
+var winMsg = "You Win!"
+var gameOVerMsg = "Game Over! Time to Study!"
+
+// var postQuestion = funtion () (
+//     questionPane.textContent = questions[currentQuestionNum][1]
+// )
+
+var createStartButton = function () {
+    var startButton = document.createElement ("button");
+    startButton.textContent = "Start Game";
+    questionPane.appendChild(startButton);
+}
+createStartButton();
+
+// answer checking loop
+// if (playerChoice = question.currentQuestionNum) {
+//     score += 10;
+//     displayCorrectInccorrect()
+//     postQuestion();
+// }
+
+// countdown timer
 var stopValue = setInterval (function () {
     countDownValue --;
     timer.textContent = countDownValue;
