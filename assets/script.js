@@ -12,6 +12,10 @@
 
 /*explaination of the game
 start button
+    create a start button that
+        hides the start button
+        triggers the timer
+        posts a question
 countdown timer
 nav button for high scores
 object of questions and answers
@@ -48,11 +52,11 @@ questionPane.innerHTML = "<H1> questionPane </H1>";
 
 var choicePane = document.createElement ("section");
 mainDiv.appendChild (choicePane);
-choicePane.innerHTML = "<H4> choicePane </H4>";
+choicePane.innerHTML = "<H4>choicePane</H4>";
 
 var responsePane = document.createElement ("section");
 mainDiv.appendChild (responsePane);
-responsePane.innerHTML = "<H2> responsePane </H2>";
+responsePane.innerHTML = "<H2></H2>";
 
 var countDownValue = 30
 var timer = document.getElementById ("timer");
@@ -73,12 +77,21 @@ var gameOVerMsg = "Game Over! Time to Study!"
 //     questionPane.textContent = questions[currentQuestionNum][1]
 // )
 
-var createStartButton = function () {
+function createStartButton() {
     var startButton = document.createElement ("button");
     startButton.textContent = "Start Game";
-    questionPane.appendChild(startButton);
+    responsePane.appendChild(startButton);
+    return startButton;
 }
+
 createStartButton();
+// startButton.addEventListener("click", function (event) {
+//     alert ("working");
+// } );
+// var startGame = function () {
+//     stopValue();
+
+// }
 
 // answer checking loop
 // if (playerChoice = question.currentQuestionNum) {
@@ -96,5 +109,6 @@ var stopValue = setInterval (function () {
     }
 }, 1000) ;
 
-
+var thing = document.querySelector("h4");
+console.log (thing);
 
