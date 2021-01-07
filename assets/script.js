@@ -58,7 +58,7 @@ var responsePane = document.createElement ("section");
 mainDiv.appendChild (responsePane);
 responsePane.innerHTML = "<H2></H2>";
 
-var countDownValue = 30
+var countDownValue;
 var timer = document.getElementById ("timer");
 console.log (timer);
 
@@ -72,10 +72,8 @@ var incorrectText = "Incorrect";
 var score = 0;
 var winMsg = "You Win!"
 var gameOVerMsg = "Game Over! Time to Study!"
+var startButton = createStartButton();
 
-// var postQuestion = funtion () (
-//     questionPane.textContent = questions[currentQuestionNum][1]
-// )
 
 function createStartButton() {
     var startButton = document.createElement ("button");
@@ -84,10 +82,21 @@ function createStartButton() {
     return startButton;
 }
 
-createStartButton();
-// startButton.addEventListener("click", function (event) {
-//     alert ("working");
-// } );
+startButton.addEventListener("click", function (event) {
+    // alert ("working");
+    countDownValue = 30;
+    postQuestion();
+} );
+
+function postQuestion() {
+   alert ("working");
+}
+
+
+
+
+
+
 // var startGame = function () {
 //     stopValue();
 
