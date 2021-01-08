@@ -95,7 +95,13 @@ startButton.addEventListener("click", function (event) {
     // alert ("working");
     countDownValue = 30;
     currentQuestionNum = 0;
-    
+    for (let index = 0; index < 3; index++) {
+        var choiceBtn = document.createElement("button");
+        choiceBtn.textContent ="answer"
+        choiceBtn.setAttribute ("id", "btn"+index);
+        choicePane.appendChild (choiceBtn);
+        console.log ("working");
+    }
     postQuestion();
 } );
 
@@ -106,10 +112,10 @@ function postQuestion(currentQuestionNum) {
     // console.log (questions[this.currentQuestionNum][1]);
     questionPane.textContent = questions[this.currentQuestionNum][0];
     currentQuestionNum++;
-    for (let index = 0; index < 3; index++) {
-        var element = array[index];
+    // for (let index = 0; index < 3; index++) {
+    //     var element = array[index];
         
-    }
+    // }
 }
 
 
