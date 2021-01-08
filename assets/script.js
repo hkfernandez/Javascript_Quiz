@@ -43,6 +43,8 @@ var counttDownTimerDiv = document.createElement ("section");
 headerDiv.appendChild (counttDownTimerDiv);
 counttDownTimerDiv.innerHTML = "<span>Timer: <span id='timer'>30</span></span>";
 
+var timer = document.getElementById ("timer");
+
 var mainDiv = document.createElement ("main");
 document.body.appendChild (mainDiv);
 
@@ -58,12 +60,9 @@ var responsePane = document.createElement ("section");
 mainDiv.appendChild (responsePane);
 responsePane.innerHTML = "<H2>responsePane</H2>";
 
-var countDownValue = 30;
-var timer = document.getElementById ("timer");
-console.log (timer);
-
 // global variables
 var gameStatus = "on";
+var countDownValue = "";
 var playerChoice;
 var questions = [["question1",1,2,3,1], ["question2",1,2,3,2], ["question3",1,2,3,3]];
 var currentQuestionNum;
@@ -73,7 +72,6 @@ var score = 0;
 var winMsg = "You Win!"
 var gameOVerMsg = "Game Over! Time to Study!"
 var startButton = createStartButton();
-
 
 function createStartButton() {
     var startButton = document.createElement ("button");
@@ -87,13 +85,14 @@ var stopValue = setInterval (function () {
     countDownValue --;
     timer.textContent = countDownValue;
     if (countDownValue === 0) {
+        endGame();
         clearInterval (stopValue);
     }
 }, 1000) ;
 
 startButton.addEventListener("click", function (event) {
     // alert ("working");
-    countDownValue = 30;
+    countDownValue = 10;
     currentQuestionNum = 0;
     for (let index = 0; index < 3; index++) {
         var choiceBtn = document.createElement("button");
@@ -106,23 +105,22 @@ startButton.addEventListener("click", function (event) {
     startButton.remove();
 } );
 
-function postQuestion(currentQuestionNum) {
-    questionPane.textContent = questions[this.currentQuestionNum][0];
-    currentQuestionNum++;
+function postQuestion() {
+    questionPane.textContent = questions[currentQuestionNum][0];
+    // currentQuestionNum++;
     for (let index = 0; index < 3; index++) {
-        var choice = questions[this.currentQuestionNum][index+1];
+        var choice = questions[currentQuestionNum][index+1];
         document.querySelector("#btn"+index).textContent = choice;
-        // console.log ("setting button text working")
     }
 }
 
 choicePane.addEventListener ("click", function(event){
+    event.preventDefault();
     if (event.target = "button") {
         playerChoice = event.target.textContent;
-        // console.log ("player choice = " +playerChoice);
-        // console.log ("correct answer = " +questions[currentQuestionNum][4]);
         if (playerChoice == questions[currentQuestionNum][4]) {
             displayCorrect();
+            score ++;
         } else{
             displayIncorrect();
         }
@@ -131,12 +129,23 @@ choicePane.addEventListener ("click", function(event){
 
 function displayCorrect () {
     responsePane.innerText = "correct";
-    setTimeout (function (){ responsePane.innerText = ""}, 500);
+    currentQuestionNum++;
+    setTimeout (function (){ responsePane.innerText = ""}, 1000);
+    postQuestion();
 }
 
 function displayIncorrect () {
     responsePane.innerText = "wrong"
-    setTimeout (function (){ responsePane.innerText = ""}, 500);
+    setTimeout (function (){ responsePane.innerText = ""}, 1000);
+}
+
+function endGame(){
+    questionPane.textContent = "Game Over";
+    for (let index = 0; index < 3; index++) {
+        document.querySelector("#btn"+index).remove();
+        questionPane.textContent = "Your final score was " + score + " Enter you initals below to save your score.";
+        var nameInput = document.createElement ("input")
+    }
 }
 
 
@@ -153,9 +162,4 @@ function displayIncorrect () {
 //     displayCorrectInccorrect()
 //     postQuestion();
 // }
-
-
-
-var thing = document.querySelector("h4");
-console.log (thing);
 
