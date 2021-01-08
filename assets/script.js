@@ -65,8 +65,8 @@ console.log (timer);
 // global variables
 var gameStatus = "on";
 var playerChoice;
-var questions = {question1: ["question1",1,2,3,1], question2: ["question2",1,2,3,2], question3: ["question3",1,2,3,3]};
-var currentQuestionNum = 1;
+var questions = [["question1",1,2,3,1], ["question2",1,2,3,2], ["question3",1,2,3,3]];
+var currentQuestionNum;
 var correctText = "Correct";
 var incorrectText = "Incorrect";
 var score = 0;
@@ -82,14 +82,34 @@ function createStartButton() {
     return startButton;
 }
 
+// countdown timer
+var stopValue = setInterval (function () {
+    countDownValue --;
+    timer.textContent = countDownValue;
+    if (countDownValue === 0) {
+        clearInterval (stopValue);
+    }
+}, 1000) ;
+
 startButton.addEventListener("click", function (event) {
     // alert ("working");
     countDownValue = 30;
+    currentQuestionNum = 0;
+    
     postQuestion();
 } );
 
-function postQuestion() {
-   alert ("working");
+function postQuestion(currentQuestionNum) {
+    // alert ("working");
+    // console.log ("this " + this.currentQuestionNum);
+    // console.log ("not this " + currentQuestionNum);
+    // console.log (questions[this.currentQuestionNum][1]);
+    questionPane.textContent = questions[this.currentQuestionNum][0];
+    currentQuestionNum++;
+    for (let index = 0; index < 3; index++) {
+        var element = array[index];
+        
+    }
 }
 
 
@@ -109,14 +129,7 @@ function postQuestion() {
 //     postQuestion();
 // }
 
-// countdown timer
-var stopValue = setInterval (function () {
-    countDownValue --;
-    timer.textContent = countDownValue;
-    if (countDownValue === 0) {
-        clearInterval (stopValue);
-    }
-}, 1000) ;
+
 
 var thing = document.querySelector("h4");
 console.log (thing);
