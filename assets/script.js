@@ -100,7 +100,7 @@ startButton.addEventListener("click", function (event) {
         choiceBtn.textContent ="answer"
         choiceBtn.setAttribute ("id", "btn"+index);
         choicePane.appendChild (choiceBtn);
-        console.log ("working");
+        // console.log ("working");
     }
     postQuestion();
 } );
@@ -112,6 +112,11 @@ function postQuestion(currentQuestionNum) {
     // console.log (questions[this.currentQuestionNum][1]);
     questionPane.textContent = questions[this.currentQuestionNum][0];
     currentQuestionNum++;
+    for (let index = 0; index < 3; index++) {
+        var choice = questions[this.currentQuestionNum][index+1];
+        document.querySelector("#btn"+index).textContent = choice;
+        console.log ("setting button text working")
+    }
     // for (let index = 0; index < 3; index++) {
     //     var element = array[index];
         
