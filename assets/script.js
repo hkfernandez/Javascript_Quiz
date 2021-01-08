@@ -64,7 +64,7 @@ mainDiv.appendChild (responsePane);
 var gameStatus = "on";
 var countDownValue = 0;
 var playerChoice;
-var questions = [["question1",1,2,3,1], ["question2",1,2,3,2], ["question3",1,2,3,3]];
+var questions = [["question1",1,2,3,1], ["question2",4,5,6,5], ["question3",7,8,9,9]];
 var currentQuestionNum;
 var correctText = "Correct";
 var incorrectText = "Incorrect";
@@ -102,14 +102,18 @@ function createStartButton() {
 
 startButton.addEventListener("click", function (event) {
     // alert ("working");
-    countDownValue = 6;
+    countDownValue = 30;
     currentQuestionNum = 0;
     stopValue = setInterval (function () {
         countDownValue --;
         timer.textContent = countDownValue;
-        if (countDownValue === 0) {
-            endGame();
+        console.log ("question number = " +currentQuestionNum);
+        console.log ("total questions = " +questions.length);
+        if (countDownValue === 0 && currentQuestionNum < questions.length - 1) {
             clearInterval (stopValue);
+            endGame();
+        } else if (countDownValue === 0) {
+            clearInterval(stopValue);
         }
     }, 1000);
     for (let index = 0; index < 3; index++) {
@@ -138,7 +142,6 @@ choicePane.addEventListener ("click", function(event){
         playerChoice = event.target.textContent;
         if (playerChoice == questions[currentQuestionNum][4]) {
             displayCorrect();
-            score ++;
         } else{
             displayIncorrect();
         }
@@ -148,16 +151,25 @@ choicePane.addEventListener ("click", function(event){
 function displayCorrect () {
     responsePane.innerText = "correct";
     currentQuestionNum++;
-    setTimeout (function (){ responsePane.innerText = ""}, 1000);
-    postQuestion();
+    score++;
+    setTimeout (function (){
+        responsePane.textContent = "";
+        if (currentQuestionNum < questions.length) {
+            postQuestion();
+        } else {
+            endGame();
+        }
+    }, 1000);
+
 }
 
 function displayIncorrect () {
     responsePane.innerText = "wrong"
-    setTimeout (function (){ responsePane.innerText = ""}, 1000);
+    setTimeout (function (){ responsePane.textContent = ""}, 1000);
 }
 
 function endGame(){
+    countDownValue = 1;
     questionPane.textContent = "Game Over";
     for (let index = 0; index < 3; index++) {
         document.querySelector("#btn"+index).remove();
