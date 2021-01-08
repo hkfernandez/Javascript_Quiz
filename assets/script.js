@@ -114,13 +114,30 @@ function postQuestion(currentQuestionNum) {
         document.querySelector("#btn"+index).textContent = choice;
         // console.log ("setting button text working")
     }
-    // for (let index = 0; index < 3; index++) {
-    //     var element = array[index];
-        
-    // }
 }
 
+choicePane.addEventListener ("click", function(event){
+    if (event.target = "button") {
+        playerChoice = event.target.textContent;
+        console.log ("player choice = " +playerChoice);
+        console.log ("correct answer = " +questions[currentQuestionNum][4]);
+        if (playerChoice == questions[currentQuestionNum][4]) {
+            displayCorrect();
+        } else{
+            displayIncorrect();
+        }
+    }
+});
 
+function displayCorrect () {
+    responsePane.textContent = "correct"
+    setTimeout (responsePane.textContent="", 3000)
+}
+
+function displayIncorrect () {
+    responsePane.textContent = "wrong"
+    setTimeout (responsePane.textContent="", 3000)
+}
 
 
 
