@@ -56,7 +56,7 @@ choicePane.innerHTML = "<H4>choicePane</H4>";
 
 var responsePane = document.createElement ("section");
 mainDiv.appendChild (responsePane);
-responsePane.innerHTML = "<H2></H2>";
+responsePane.innerHTML = "<H2>responsePane</H2>";
 
 var countDownValue = 30;
 var timer = document.getElementById ("timer");
@@ -119,8 +119,8 @@ function postQuestion(currentQuestionNum) {
 choicePane.addEventListener ("click", function(event){
     if (event.target = "button") {
         playerChoice = event.target.textContent;
-        console.log ("player choice = " +playerChoice);
-        console.log ("correct answer = " +questions[currentQuestionNum][4]);
+        // console.log ("player choice = " +playerChoice);
+        // console.log ("correct answer = " +questions[currentQuestionNum][4]);
         if (playerChoice == questions[currentQuestionNum][4]) {
             displayCorrect();
         } else{
@@ -130,13 +130,13 @@ choicePane.addEventListener ("click", function(event){
 });
 
 function displayCorrect () {
-    responsePane.textContent = "correct"
-    setTimeout (responsePane.textContent="", 3000)
+    responsePane.innerText = "correct";
+    // setTimeout (responsePane.innerText = "", 1000);
 }
 
 function displayIncorrect () {
-    responsePane.textContent = "wrong"
-    setTimeout (responsePane.textContent="", 3000)
+    responsePane.innerText = "wrong"
+//     setTimeout (responsePane.innerText = "", 3000)
 }
 
 
