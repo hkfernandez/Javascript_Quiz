@@ -58,11 +58,11 @@ choicePane.innerHTML = "<H4>choicePane</H4>";
 
 var responsePane = document.createElement ("section");
 mainDiv.appendChild (responsePane);
-responsePane.innerHTML = "<H2>responsePane</H2>";
+// responsePane.innerHTML = "<H2>responsePane</H2>";
 
 // global variables
 var gameStatus = "on";
-var countDownValue = "";
+var countDownValue = 0;
 var playerChoice;
 var questions = [["question1",1,2,3,1], ["question2",1,2,3,2], ["question3",1,2,3,3]];
 var currentQuestionNum;
@@ -81,19 +81,29 @@ function createStartButton() {
 }
 
 // countdown timer
-var stopValue = setInterval (function () {
+// var stopValue = setInterval (function () {
+//     countDownValue --;
+//     timer.textContent = countDownValue;
+//     if (countDownValue === 0) {
+//         endGame();
+//         clearInterval (stopValue);
+//     }
+// }, 1000) ;
+
+function countDown () {
     countDownValue --;
     timer.textContent = countDownValue;
     if (countDownValue === 0) {
         endGame();
         clearInterval (stopValue);
     }
-}, 1000) ;
+}
 
 startButton.addEventListener("click", function (event) {
     // alert ("working");
-    countDownValue = 10;
+    countDownValue = 5;
     currentQuestionNum = 0;
+    var stopValue = setInterval (countDown, 1000);
     for (let index = 0; index < 3; index++) {
         var choiceBtn = document.createElement("button");
         choiceBtn.textContent ="answer"
@@ -143,8 +153,9 @@ function endGame(){
     questionPane.textContent = "Game Over";
     for (let index = 0; index < 3; index++) {
         document.querySelector("#btn"+index).remove();
-        questionPane.textContent = "Your final score was " + score + " Enter you initals below to save your score.";
-        var nameInput = document.createElement ("input")
+        choicePane.textContent = "Your final score was " + score + " Enter you initals below to save your score.";
+        var nameInput = document.innerHTML = "<input id='playerInitals' placeholder='Your Initials Here></input>";
+        responsePane.appendChild(nameInput);
     }
 }
 
