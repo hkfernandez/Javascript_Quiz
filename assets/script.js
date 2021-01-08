@@ -58,7 +58,7 @@ var responsePane = document.createElement ("section");
 mainDiv.appendChild (responsePane);
 responsePane.innerHTML = "<H2></H2>";
 
-var countDownValue;
+var countDownValue = 30;
 var timer = document.getElementById ("timer");
 console.log (timer);
 
@@ -103,19 +103,16 @@ startButton.addEventListener("click", function (event) {
         // console.log ("working");
     }
     postQuestion();
+    startButton.remove();
 } );
 
 function postQuestion(currentQuestionNum) {
-    // alert ("working");
-    // console.log ("this " + this.currentQuestionNum);
-    // console.log ("not this " + currentQuestionNum);
-    // console.log (questions[this.currentQuestionNum][1]);
     questionPane.textContent = questions[this.currentQuestionNum][0];
     currentQuestionNum++;
     for (let index = 0; index < 3; index++) {
         var choice = questions[this.currentQuestionNum][index+1];
         document.querySelector("#btn"+index).textContent = choice;
-        console.log ("setting button text working")
+        // console.log ("setting button text working")
     }
     // for (let index = 0; index < 3; index++) {
     //     var element = array[index];
