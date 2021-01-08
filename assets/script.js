@@ -131,12 +131,12 @@ choicePane.addEventListener ("click", function(event){
 
 function displayCorrect () {
     responsePane.innerText = "correct";
-    // setTimeout (responsePane.innerText = "", 1000);
+    setTimeout (function (){ responsePane.innerText = ""}, 500);
 }
 
 function displayIncorrect () {
     responsePane.innerText = "wrong"
-//     setTimeout (responsePane.innerText = "", 3000)
+    setTimeout (function (){ responsePane.innerText = ""}, 500);
 }
 
 
