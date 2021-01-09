@@ -1,43 +1,11 @@
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and score
 
-/*explaination of the game
-start button
-    create a start button that
-        hides the start button
-        triggers the timer
-        posts a question
-countdown timer
-nav button for high scores
-object of questions and answers
-start timer
-present a question
-capture the response
-compare resonse to answer
-display correct or wrong
-when all questions have been asked stop timer
-show score
-prompt user to enter intials
-record intials and score
-navigate to high score page
-button for return to game page*/
-
-// creation of page layout
 var headerDiv = document.createElement ("header");
 document.body.appendChild (headerDiv);
 
 var hiScrBtnDiv = document.createElement ("section");
 headerDiv.appendChild (hiScrBtnDiv);
-hiScrBtnDiv.textContent = "high score button";
+hiScrBtnDiv.textContent = "Score List";
+hiScrBtnDiv.addEventListener("click",displayScores);
 
 var counttDownTimerDiv = document.createElement ("section");
 headerDiv.appendChild (counttDownTimerDiv);
@@ -50,11 +18,11 @@ document.body.appendChild (mainDiv);
 
 var questionPane = document.createElement ("section");
 mainDiv.appendChild (questionPane);
-questionPane.innerHTML = "<H1> questionPane </H1>";
+// questionPane.innerHTML = "<H1> questionPane </H1>";
 
 var choicePane = document.createElement ("section");
 mainDiv.appendChild (choicePane);
-choicePane.innerHTML = "<H4>choicePane</H4>";
+// choicePane.innerHTML = "<H4>choicePane</H4>";
 
 var responsePane = document.createElement ("section");
 mainDiv.appendChild (responsePane);
@@ -78,11 +46,11 @@ function createStartButton() {
     var startButton = document.createElement ("button");
     startButton.textContent = "Start Game";
     responsePane.appendChild(startButton);
+    questionPane.textContent = "Ready for the quiz?"
     return startButton;
 }
 
-startButton.addEventListener("click", function (event) {
-    // alert ("working");
+function clickStartBtn (){
     countDownValue = 30;
     currentQuestionNum = 0;
     stopValue = setInterval (function () {
@@ -106,7 +74,9 @@ startButton.addEventListener("click", function (event) {
     }
     postQuestion();
     startButton.remove();
-} );
+}
+
+startButton.addEventListener("click", clickStartBtn);
 
 function postQuestion() {
     questionPane.textContent = questions[currentQuestionNum][0];
@@ -176,8 +146,8 @@ function clickSubmit () {
         scoresObj = {};
     }
     scoresObj[playerInitials]=score;
-    console.log("initials " +playerInitials);
-    console.log("score " +score);
+    // console.log("initials " +playerInitials);
+    // console.log("score " +score);
     // var currentInitialsAndScores =[playerInitials,JSON.stringify(score)];
     localStorage.setItem("quizScores", JSON.stringify(scoresObj));
     displayScores();
@@ -185,12 +155,13 @@ function clickSubmit () {
 
 
 function displayScores (){
-    document.querySelector("#playerInitials").remove();
-    document.querySelector("#submit-btn").remove();
-    questionPane.textContent="List Scores";
+    // document.querySelector("#playerInitials").remove();
+    // document.querySelector("#submit-btn").remove();
+    responsePane.innerHTML = ""
+    questionPane.textContent="Scores";
     choicePane.textContent="";
     var storedQuizScores = JSON.parse(localStorage.getItem("quizScores"));
-    console.log(storedQuizScores);
+    // console.log(storedQuizScores);
     for (var key in storedQuizScores) {
         var newDiv = document.createElement("div");
         newDiv.textContent = `${key}: ${storedQuizScores[key]}`;
@@ -206,6 +177,7 @@ function displayScores (){
 
 function clickPlayAgain(){
     choicePane.innerHTML = "";
+    clickStartBtn();
 };
 
 // old countdown timer to be deleted
