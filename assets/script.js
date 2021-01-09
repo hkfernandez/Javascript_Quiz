@@ -32,7 +32,7 @@ mainDiv.appendChild (responsePane);
 var gameStatus = "on";
 var countDownValue = 0;
 var playerChoice;
-var questions = [["question1",1,2,3,1], ["question2",4,5,6,5], ["question3",7,8,9,9]];
+var questions = [["Do you like to watch as seen on tv commercials?","Yes","Never","No, I just watch them beacuse they are on.","Yes"], ["Why don't you ever see baby pigions","Baby pigions can't leave the nest.","They are so cute they would  burn your eyes.","Arn't all pigions babies?","Baby pigions can't leave the nest."], ["How much wood could a woodchuck chuck?","Some wood","Most wood","More wood than me","More wood than me"],["Do you use Facebook", "No","Yes","Maybe","Yes"],["Is cereal soup?","Cereal is soup, but not all soup is cereal","It is if is served hot.","No, but it is soupy.","No, but it is soupy."],["How many chickens would it take to kill and elephant?","100","300","It could never happen.","100"],["How would you are the size of your house?","Postage stamp","Post Office","UPS","UPS"] ];
 var currentQuestionNum;
 var correctText = "Correct";
 var incorrectText = "Incorrect";
