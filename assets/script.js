@@ -171,11 +171,11 @@ function endGame(){
 function clickSubmit () {
     var playerInitials = document.getElementById("playerInitials").value;
 
-    var scoresObj = localStorage.getItem("quizScores");
+    var scoresObj = JSON.parse(localStorage.getItem("quizScores"));
     if (scoresObj == null){
         scoresObj = {};
-        scoresObj[playerInitials]=score;
     }
+    scoresObj[playerInitials]=score;
     console.log("initials " +playerInitials);
     console.log("score " +score);
     // var currentInitialsAndScores =[playerInitials,JSON.stringify(score)];
@@ -196,14 +196,12 @@ function displayScores (){
         newDiv.textContent = `${key}: ${storedQuizScores[key]}`;
         choicePane.appendChild(newDiv);
     }
-
-    
     var playAgainButton = document.createElement("button");
     playAgainButton.textContent = "Play Again";
     choicePane.appendChild(playAgainButton);
-    // playAgainButton.addEventListener("click", function(){
-    //     // clickPlayAgain();
-    // });
+    playAgainButton.addEventListener("click", function(){
+        clickPlayAgain();
+    });
 }
 
 
