@@ -202,8 +202,11 @@ function displayScores (){
     playAgainButton.addEventListener("click", function(){
         clickPlayAgain();
     });
-}
+};
 
+function clickPlayAgain(){
+    choicePane.innerHTML = "";
+};
 
 // old countdown timer to be deleted
 // var stopValue = setInterval (function () {
