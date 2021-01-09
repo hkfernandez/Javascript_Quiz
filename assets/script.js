@@ -81,24 +81,7 @@ function createStartButton() {
     return startButton;
 }
 
-// old countdown timer to be deleted
-// var stopValue = setInterval (function () {
-//     countDownValue --;
-//     timer.textContent = countDownValue;
-//     if (countDownValue === 0) {
-//         endGame();
-//         clearInterval (stopValue);
-//     }
-// }, 1000) ;
 
-// function countDown (stopValue) {
-//     countDownValue --;
-//     timer.textContent = countDownValue;
-//     if (countDownValue === 0) {
-//         endGame();
-//         clearInterval (stopValue);
-//     }
-// }
 
 startButton.addEventListener("click", function (event) {
     // alert ("working");
@@ -174,24 +157,45 @@ function endGame(){
     for (let index = 0; index < 3; index++) {
         document.querySelector("#btn"+index).remove();
     }
-    choicePane.textContent = "Your final score was " + score + " Enter you initals below to save your score.";
+    choicePane.textContent = "Your final score was " + score + ". Enter you initals below to save your score.";
     var nameInput = document.createElement ("input");
-    nameInput.innerHTML = "<input id='playerInitals' placeholder='Your Initials Here></input>";
+    nameInput.innerHTML = "<input id='playerInitials' placeholder='Your Initials Here'></input>";
     responsePane.appendChild(nameInput);
+    var submitBtn = document.createElement ("button");
+    submitBtn.textContent = "Submit";
+    submitBtn.setAttribute("id", "submit-btn");
+    submitBtn.addEventListener("click", clickSubmit);
+    responsePane.appendChild(submitBtn);
+}
+
+function clickSubmit () {
+    var playerinitials = document.querySelector("#playerInitials").value;
+    localStorage.setItem(playerinitials, JSON.stringify(score));
+    // displayHighScores();
 }
 
 
+function displayHighScores (){
+    document.querySelector("#player-initials").remove();
+    document.querySelector("#submit-Btn").remove();
+}
 
 
-// var startGame = function () {
-//     stopValue();
+// old countdown timer to be deleted
+// var stopValue = setInterval (function () {
+//     countDownValue --;
+//     timer.textContent = countDownValue;
+//     if (countDownValue === 0) {
+//         endGame();
+//         clearInterval (stopValue);
+//     }
+// }, 1000) ;
 
+// function countDown (stopValue) {
+//     countDownValue --;
+//     timer.textContent = countDownValue;
+//     if (countDownValue === 0) {
+//         endGame();
+//         clearInterval (stopValue);
+//     }
 // }
-
-// answer checking loop
-// if (playerChoice = question.currentQuestionNum) {
-//     score += 10;
-//     displayCorrectInccorrect()
-//     postQuestion();
-// }
-
