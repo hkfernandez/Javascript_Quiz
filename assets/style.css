@@ -14,8 +14,16 @@ main {
     justify-content: space-between;
     width: 600px;
     margin: auto;
-
 }
+
+main section {
+ margin: auto;
+}
+
+main > section {
+    font-size: x-large;
+}
+
 body {
     background-color: pink;
     font-family: 'Roboto', sans-serif;
@@ -23,4 +31,17 @@ body {
 
 button {
     display: block;
+    font-size: large;
+    margin: 1em;
+    border: 2px solid black;
+}
+
+section {
+    margin: 0.25em;
+}
+
+input {
+    text-align: center;
+    border: none;
+    margin: 1em;
 }

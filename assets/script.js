@@ -1,4 +1,4 @@
-
+// page layout
 var headerDiv = document.createElement ("header");
 document.body.appendChild (headerDiv);
 
@@ -18,15 +18,12 @@ document.body.appendChild (mainDiv);
 
 var questionPane = document.createElement ("section");
 mainDiv.appendChild (questionPane);
-// questionPane.innerHTML = "<H1> questionPane </H1>";
 
 var choicePane = document.createElement ("section");
 mainDiv.appendChild (choicePane);
-// choicePane.innerHTML = "<H4>choicePane</H4>";
 
 var responsePane = document.createElement ("section");
 mainDiv.appendChild (responsePane);
-// responsePane.innerHTML = "<H2>responsePane</H2>";
 
 // global variables
 var gameStatus = "on";
@@ -56,8 +53,6 @@ function clickStartBtn (){
     stopValue = setInterval (function () {
         countDownValue --;
         timer.textContent = countDownValue;
-        // console.log ("question number = " +currentQuestionNum);
-        // console.log ("total questions = " +questions.length);
         if (countDownValue === 0 && currentQuestionNum < questions.length - 1) {
             clearInterval (stopValue);
             endGame();
@@ -80,7 +75,6 @@ startButton.addEventListener("click", clickStartBtn);
 
 function postQuestion() {
     questionPane.textContent = questions[currentQuestionNum][0];
-    // currentQuestionNum++;
     for (let index = 0; index < 3; index++) {
         var choice = questions[currentQuestionNum][index+1];
         document.querySelector("#btn"+index).textContent = choice;
@@ -111,7 +105,6 @@ function displayCorrect () {
             endGame();
         }
     }, 1000);
-
 }
 
 function displayIncorrect () {
@@ -123,9 +116,6 @@ function endGame(){
     countDownValue = 1;
     questionPane.textContent = "Game Over";
     choicePane.innerHTML = ""
-    // for (let index = 0; index < 3; index++) {
-    //     document.querySelector("#btn"+index).remove();
-    // }
     choicePane.textContent = "Your final score was " + score + ". Enter you initals below to save your score.";
     var nameInput = document.createElement ("input");
     nameInput.setAttribute("id","playerInitials");
@@ -141,28 +131,20 @@ function endGame(){
 
 function clickSubmit () {
     var playerInitials = document.getElementById("playerInitials").value;
-
     var scoresObj = JSON.parse(localStorage.getItem("quizScores"));
     if (scoresObj == null){
         scoresObj = {};
     }
     scoresObj[playerInitials]=score;
-    // console.log("initials " +playerInitials);
-    // console.log("score " +score);
-    // var currentInitialsAndScores =[playerInitials,JSON.stringify(score)];
     localStorage.setItem("quizScores", JSON.stringify(scoresObj));
     displayScores();
 }
 
-
 function displayScores (){
-    // document.querySelector("#playerInitials").remove();
-    // document.querySelector("#submit-btn").remove();
     responsePane.innerHTML = ""
     questionPane.textContent="Scores";
     choicePane.textContent="";
     var storedQuizScores = JSON.parse(localStorage.getItem("quizScores"));
-    // console.log(storedQuizScores);
     for (var key in storedQuizScores) {
         var newDiv = document.createElement("div");
         newDiv.textContent = `${key}: ${storedQuizScores[key]}`;
@@ -180,22 +162,3 @@ function clickPlayAgain(){
     choicePane.innerHTML = "";
     clickStartBtn();
 };
-
-// old countdown timer to be deleted
-// var stopValue = setInterval (function () {
-//     countDownValue --;
-//     timer.textContent = countDownValue;
-//     if (countDownValue === 0) {
-//         endGame();
-//         clearInterval (stopValue);
-//     }
-// }, 1000) ;
-
-// function countDown (stopValue) {
-//     countDownValue --;
-//     timer.textContent = countDownValue;
-//     if (countDownValue === 0) {
-//         endGame();
-//         clearInterval (stopValue);
-//     }
-// }
