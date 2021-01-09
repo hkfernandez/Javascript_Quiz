@@ -170,15 +170,29 @@ function endGame(){
 
 function clickSubmit () {
     var playerInitials = document.getElementById("playerInitials").value;
-    console.log (playerInitials+ "hello");
-    localStorage.setItem(playerInitials, JSON.stringify(score));
-    displayHighScores();
+
+    var scoresObj = localStorage.getItem("quizScores");
+    if (scoresObj == null){
+        scoresObj = {};
+        scoresObj.playerInitials=score;
+    }
+    // var currentInitialsAndScores =[playerInitials,JSON.stringify(score)];
+    localStorage.setItem("quizScores", JSON.stringify(scoresObj));
+    // displayHighScores();
 }
 
 
 function displayHighScores (){
     document.querySelector("#playerInitials").remove();
     document.querySelector("#submit-btn").remove();
+    questionPane.textContent="List of high scores";
+    choicePane.textContent="";
+    var playAgainButton = document.createElement("button");
+    playAgainButton.textContent = "Play Again";
+    choicePane.appendChild(playAgainButton);
+    playAgainButton.addEventListener("click", function(){
+        // clickPlayAgain();
+    });
 }
 
 
