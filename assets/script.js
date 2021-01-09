@@ -81,8 +81,6 @@ function createStartButton() {
     return startButton;
 }
 
-
-
 startButton.addEventListener("click", function (event) {
     // alert ("working");
     countDownValue = 30;
@@ -90,8 +88,8 @@ startButton.addEventListener("click", function (event) {
     stopValue = setInterval (function () {
         countDownValue --;
         timer.textContent = countDownValue;
-        console.log ("question number = " +currentQuestionNum);
-        console.log ("total questions = " +questions.length);
+        // console.log ("question number = " +currentQuestionNum);
+        // console.log ("total questions = " +questions.length);
         if (countDownValue === 0 && currentQuestionNum < questions.length - 1) {
             clearInterval (stopValue);
             endGame();
@@ -159,7 +157,9 @@ function endGame(){
     }
     choicePane.textContent = "Your final score was " + score + ". Enter you initals below to save your score.";
     var nameInput = document.createElement ("input");
-    nameInput.innerHTML = "<input id='playerInitials' placeholder='Your Initials Here'></input>";
+    nameInput.setAttribute("id","playerInitials");
+    nameInput.setAttribute("type","text");
+    nameInput.setAttribute("placeholder","Your Initials Here");
     responsePane.appendChild(nameInput);
     var submitBtn = document.createElement ("button");
     submitBtn.textContent = "Submit";
@@ -169,15 +169,16 @@ function endGame(){
 }
 
 function clickSubmit () {
-    var playerinitials = document.querySelector("#playerInitials").value;
-    localStorage.setItem(playerinitials, JSON.stringify(score));
-    // displayHighScores();
+    var playerInitials = document.getElementById("playerInitials").value;
+    console.log (playerInitials+ "hello");
+    localStorage.setItem(playerInitials, JSON.stringify(score));
+    displayHighScores();
 }
 
 
 function displayHighScores (){
-    document.querySelector("#player-initials").remove();
-    document.querySelector("#submit-Btn").remove();
+    document.querySelector("#playerInitials").remove();
+    document.querySelector("#submit-btn").remove();
 }
 
 
