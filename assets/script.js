@@ -122,9 +122,10 @@ function displayIncorrect () {
 function endGame(){
     countDownValue = 1;
     questionPane.textContent = "Game Over";
-    for (let index = 0; index < 3; index++) {
-        document.querySelector("#btn"+index).remove();
-    }
+    choicePane.innerHTML = ""
+    // for (let index = 0; index < 3; index++) {
+    //     document.querySelector("#btn"+index).remove();
+    // }
     choicePane.textContent = "Your final score was " + score + ". Enter you initals below to save your score.";
     var nameInput = document.createElement ("input");
     nameInput.setAttribute("id","playerInitials");
