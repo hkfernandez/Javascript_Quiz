@@ -174,25 +174,36 @@ function clickSubmit () {
     var scoresObj = localStorage.getItem("quizScores");
     if (scoresObj == null){
         scoresObj = {};
-        scoresObj.playerInitials=score;
+        scoresObj[playerInitials]=score;
     }
+    console.log("initials " +playerInitials);
+    console.log("score " +score);
     // var currentInitialsAndScores =[playerInitials,JSON.stringify(score)];
     localStorage.setItem("quizScores", JSON.stringify(scoresObj));
-    // displayHighScores();
+    displayScores();
 }
 
 
-function displayHighScores (){
+function displayScores (){
     document.querySelector("#playerInitials").remove();
     document.querySelector("#submit-btn").remove();
-    questionPane.textContent="List of high scores";
+    questionPane.textContent="List Scores";
     choicePane.textContent="";
+    var storedQuizScores = JSON.parse(localStorage.getItem("quizScores"));
+    console.log(storedQuizScores);
+    for (var key in storedQuizScores) {
+        var newDiv = document.createElement("div");
+        newDiv.textContent = `${key}: ${storedQuizScores[key]}`;
+        choicePane.appendChild(newDiv);
+    }
+
+    
     var playAgainButton = document.createElement("button");
     playAgainButton.textContent = "Play Again";
     choicePane.appendChild(playAgainButton);
-    playAgainButton.addEventListener("click", function(){
-        // clickPlayAgain();
-    });
+    // playAgainButton.addEventListener("click", function(){
+    //     // clickPlayAgain();
+    // });
 }
 
 
