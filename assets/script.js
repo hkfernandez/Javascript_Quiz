@@ -50,6 +50,7 @@ function createStartButton() {
 function clickStartBtn (){
     countDownValue = 30;
     currentQuestionNum = 0;
+    score = 0;
     stopValue = setInterval (function () {
         countDownValue --;
         timer.textContent = countDownValue;
